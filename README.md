@@ -79,7 +79,7 @@ Add ASN (1)
 ```
 contract.IANA_addASN(1, acct.address, sigV, sigR, sigS)
 ```
-^ this will get reverted. see IANA.sol contract. function not validation signature (msgSigned). Will fail.
+^ this will get reverted. see IANA.sol contract. function not validating signature (msgSigned). Will fail.
 
 Add ASN (2)
 ```
