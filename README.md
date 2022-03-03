@@ -5,6 +5,51 @@
 ### Getting setup with Brownie
 https://iamdefinitelyahuman.medium.com/getting-started-with-brownie-part-1-9b2181f4cb99
 
+## Sending ETH from acct1 to acct2 triggered by the reception of an HTTP packet with the header "eth-header" to a Flask Server
+### Setup
+Install Flask and scapy
+```
+pip install Flask
+pip install scapy
+```
+
+Add sudo for python in virtual environment
+```
+echo "psudo() { sudo env PATH="$PATH" "$@"; }" > ~/.bashrc 
+```
+^ Now when we want to run python with sudo, use `psudo`
+
+Launch flask app on localhost:5100
+```
+python eth-brownie-bgp/bgp/netfilter/app.py
+```
+
+Install IPTables rule to forward packets up to nfqueue so we can process it
+```
+sudo iptables -I INPUT -p tcp -d 192.168.1.211 --dport 5100 -j NFQUEUE --queue-num 1
+```
+
+Start Brownie in it's own terminal window
+```
+brownie console
+```
+
+In another terminal, run the transfer method -> will hang and wait for packet sent from IPTables
+```
+psudo python test-transfer.py
+```
+^ MUST run with psudo (aka need sudo to run this)
+
+### Run
+Send an HTTP request to the flask server to trigger the transfer of ETH
+```
+curl -H "eth-header: true" http://192.168.1.211:5100
+```
+
+Logs of the transaction should appear in the terminal where `psudo python test-transfer.py` was run
+
+---------------------------------
+
 ### Signing Transactions and Multisig
 e.g. get soon to be owner of AS and IANA to sign off on AS ownership (ASN => AS address)
 https://web3py.readthedocs.io/en/stable/web3.eth.account.html
