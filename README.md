@@ -7,8 +7,10 @@ https://iamdefinitelyahuman.medium.com/getting-started-with-brownie-part-1-9b218
 
 ## Sending ETH from acct1 to acct2 triggered by the reception of an HTTP packet with the header "eth-header" to a Flask Server
 ### Setup
-Install Flask and scapy
+Install dependencies 
 ```
+pip install Web3
+pip install brownie
 pip install Flask
 pip install scapy
 ```
