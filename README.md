@@ -38,7 +38,7 @@ brownie console
 
 In another terminal, run the transfer method -> will hang and wait for packet sent from IPTables
 ```
-psudo python test-transfer.py
+psudo python eth-brownie-bgp/bgp/greg_tests/test-transfer.py
 ```
 ^ MUST run with psudo (aka need sudo to run this)
 
