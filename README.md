@@ -45,7 +45,7 @@ psudo python eth-brownie-bgp/bgp/greg_tests/test-transfer.py
 ### Run
 Send an HTTP request to the flask server to trigger the transfer of ETH
 ```
-curl -H "eth-header: true" http://192.168.1.211:5100
+curl -H "eth-header: true" http://127.0.0.1:5100
 ```
 
 Logs of the transaction should appear in the terminal where `psudo python test-transfer.py` was run
