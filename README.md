@@ -10,7 +10,7 @@ https://iamdefinitelyahuman.medium.com/getting-started-with-brownie-part-1-9b218
 Install dependencies 
 ```
 pip install Web3
-pip install brownie
+pip install eth-brownie
 pip install Flask
 pip install scapy
 ```
