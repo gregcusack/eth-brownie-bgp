@@ -7,17 +7,46 @@ https://iamdefinitelyahuman.medium.com/getting-started-with-brownie-part-1-9b218
 
 ## Sending ETH from acct1 to acct2 triggered by the reception of an HTTP packet with the header "eth-header" to a Flask Server
 ### Setup
-Install dependencies 
+Setup SSH Keys with github
 ```
-pip install Web3
-pip install brownie
-pip install Flask
-pip install scapy
+ssh-keygen
+...
 ```
 
-Add sudo for python in virtual environment
+Install dependencies 
 ```
-echo "psudo() { sudo env PATH="$PATH" "$@"; }" > ~/.bashrc 
+sudo apt install python3.8-dev build-essential libnetfilter-queue-dev python3.8-venv
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install v16.14.0
+nvm use v16.14.0
+npm install -g ganache-cli
+npm install -g npm@8.5.3
+```
+
+Clone repo
+```
+git clone git@github.com:gregcusack/eth-brownie-bgp.git
+```
+
+Setup python virtual environment from within `eth-brownie-bgp`
+```
+python3.8 -m venv venv/
+source venv/bin/activate
+```
+
+Upgrade pip
+```
+python3 -m pip install --upgrade pip
+```
+
+Install python libraries
+```
+python -m pip install Web3 eth-brownie Flask scapy NetfilterQueue flask-restful
+```
+
+Add sudo for python in virtual environment. Add the following into `~/.bashrc`
+```
+psudo() { sudo env PATH="$PATH" "$@"; }
 ```
 ^ Now when we want to run python with sudo, use `psudo`
 
@@ -28,7 +57,7 @@ python eth-brownie-bgp/bgp/netfilter/app.py
 
 Install IPTables rule to forward packets up to nfqueue so we can process it
 ```
-sudo iptables -I INPUT -p tcp -d 192.168.1.211 --dport 5100 -j NFQUEUE --queue-num 1
+sudo iptables -I INPUT -p tcp -d <server-ip> --dport <server-port> -j NFQUEUE --queue-num 1
 ```
 
 Start Brownie in it's own terminal window
