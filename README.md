@@ -15,6 +15,7 @@ ssh-keygen
 
 Install dependencies 
 ```
+<<<<<<< HEAD
 sudo apt install python3.8-dev build-essential libnetfilter-queue-dev python3.8-venv
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 nvm install v16.14.0
