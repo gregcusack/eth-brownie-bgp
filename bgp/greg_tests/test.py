@@ -54,24 +54,29 @@ def to_32byte_hex(val):
 
 
 if __name__ == "__main__":
-    # w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
-    # acct = w3.eth.account.create()
+    w3 = Web3(Web3.HTTPProvider("http://192.168.1.2:8545"))
+    acct = w3.eth.account.create()
+    print(acct)
 
-    brownie.network.connect('development')
-    brownie.network.show_active()
-    if not brownie.network.is_connected():
-        print("error can't conenct to brownie network")
-        sys.exit(-1)
+    #brownie.network.connect('development')
+    #brownie.network.connect('bgp-chain')
+    #brownie.network.connect('http://192.168.1.2:8545')
+    #brownie.network.show_active()
+    #if not brownie.network.is_connected():
+    #    print("error can't conenct to brownie network")
+    #    sys.exit(-1)
 
-    nfqueue = NetfilterQueue()
-    nfqueue.bind(1, print_and_accept)
-    print("waiting for nfqueue packets in queue...")
-    try:
-        nfqueue.run()
-    except KeyboardInterrupt:
-        print('')
+    print("exiting...")
 
-    nfqueue.unbind()
+#    nfqueue = NetfilterQueue()
+#    nfqueue.bind(1, print_and_accept)
+#    print("waiting for nfqueue packets in queue...")
+#    try:
+#        nfqueue.run()
+#    except KeyboardInterrupt:
+#        print('')
+
+#    nfqueue.unbind()
 
 
 
