@@ -1,8 +1,6 @@
-#import web3
 from web3 import Web3 #, HTTPProvider
 import brownie
 import sys
-#from web3.auto import w3
 
 from netfilterqueue import NetfilterQueue
 from scapy.all import *
@@ -41,31 +39,15 @@ def transfer_tokens():
 
 
 def print_and_accept(pkt):
-    # print(pkt)
     pkt.accept()
-    # print(pkt)
-    # headers = pkt.haslayer(TCP)
-    # print(headers)
     load_layer("http")
     spkt=IP(pkt.get_payload())
     if spkt.haslayer(Raw):
-        if b"eth-header" in spkt[Raw].load:
+        if b"eth-header: true" in spkt[Raw].load:
             transfer_tokens()
-
-    # if spkt.haslayer(TCP):
-    #     if spkt.dport == 5100:
-    #         if spkt.haslayer(Raw):
-    #             print(spkt[Raw].load)
-
-    # print(spkt[IP].src)
-    # print(spkt.haslayer(TCP))
-    # transfer_tokens()
 
 def to_32byte_hex(val):
     return Web3.toHex(Web3.toBytes(val).rjust(32, b'\0'))
-
-
-#from brownie import *
 
 
 if __name__ == "__main__":
@@ -85,7 +67,4 @@ if __name__ == "__main__":
 
     nfqueue.unbind()
 
-
-
-    #return Token.deploy("Test Token", "TST", 18, 1e21, {'from': accounts[0]})
 
